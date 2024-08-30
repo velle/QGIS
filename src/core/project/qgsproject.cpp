@@ -4586,6 +4586,11 @@ bool QgsProject::unzip( const QString &filename, Qgis::ProjectReadFlags flags )
   }
 
   // read the project file
+  //@th: the function is called readProjectFile, but what it does is
+  //@th: opening/loading/instantiating/parsing the project
+  //@th: Or what...? When looking at an archive, and then saying read,
+  //@th: that makes me think we just read the serialized data,
+  //@th: perhaps unzipping in the process.
   if ( ! readProjectFile( static_cast<QgsProjectArchive *>( mArchive.get() )->projectFile(), flags ) )
   {
     setError( tr( "Cannot read unzipped qgs project file" ) + QStringLiteral( ": " ) + error() );
@@ -4605,9 +4610,16 @@ bool QgsProject::zip( const QString &filename )
   clearError();
 
   // save the current project in a temporary .qgs file
+  //@th: Is that an actual file? where is it at?
+  //@th: Is that a function call to `archive`?
+  //@th: The result from the archive call is also a QgsProjectArchive,
+  //@th: judging from the pointer type
   std::unique_ptr<QgsProjectArchive> archive( new QgsProjectArchive() );
-  const QString baseName = QFileInfo( filename ).baseName();
-  const QString qgsFileName = QStringLiteral( "%1.qgs" ).arg( baseName );
+  const QString stem = filename.left(filename.length() - 4);
+  const QString qgsFileName = QStringLiteral( "%1.qgs" ).arg( stem );
+  // assuming the filename argument always ends in .qgz
+  // london.qgz       -> london.qgs
+  // london v 2.0.qgz -> london v 2.0.qgs
   QFile qgsFile( QDir( archive->dir() ).filePath( qgsFileName ) );
 
   bool writeOk = false;
@@ -4628,6 +4640,8 @@ bool QgsProject::zip( const QString &filename )
   const QFileInfo info( qgsFile );
   const QString asExt = QStringLiteral( ".%1" ).arg( QgsAuxiliaryStorage::extension() );
   const QString asFileName = info.path() + QDir::separator() + info.completeBaseName() + asExt;
+  //@th: add comment about the form of `asFileName`
+  //@th: maybe it can bee seen in the errorString below
 
   bool auxiliaryStorageSavedOk = true;
   if ( ! saveAuxiliaryStorage( asFileName ) )

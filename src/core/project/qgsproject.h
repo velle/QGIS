@@ -2320,15 +2320,19 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
     bool loadEmbeddedNodes( QgsLayerTreeGroup *group, Qgis::ProjectReadFlags flags = Qgis::ProjectReadFlags() ) SIP_SKIP;
 
     //! Read .qgs file
+    // @thomas: does it also read the aux files?
     bool readProjectFile( const QString &filename, Qgis::ProjectReadFlags flags = Qgis::ProjectReadFlags() );
 
     //! Write .qgs file
+    // @thomas: does it also save the aux files?
     bool writeProjectFile( const QString &filename );
 
     //! Unzip .qgz file then read embedded .qgs file
+    // @thomas: does it also read the aux files inside the zip?
     bool unzip( const QString &filename, Qgis::ProjectReadFlags flags = Qgis::ProjectReadFlags() );
 
-    //! Zip project
+    //! Writes project to .qgz file
+    // @thomas: does it also write the aux files?
     bool zip( const QString &filename );
 
     //! Save auxiliary storage to database
