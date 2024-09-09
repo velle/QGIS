@@ -216,14 +216,14 @@ endif()
 
 
 if(GDAL_SEARCH_MODE STREQUAL MODULE)
-    gdal_module_search()
+    find_gdal_module_mode()
 endif()
 
 
 if(GDAL_SEARCH_MODE STREQUAL CONFIG_THEN_MODULE)
     find_package(GDAL CONFIG)
     if(NOT GDAL_FOUND)
-        gdal_module_search()
+        find_gdal_module_mode()
     endif()
 endif()
 
