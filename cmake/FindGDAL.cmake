@@ -13,8 +13,7 @@
 #
 # GDAL_INCLUDE_DIR      = where to find headers 
 
-find_package(GDAL CONFIG)
-if(NOT GDAL_FOUND)
+function (find_gdal_module_mode)
   # Fallback logic for GDAL < 3.5, as soon as we switch to GDAL>=3.5 this file (Find_GDAL.cmake) can be deleted
   INCLUDE (${CMAKE_SOURCE_DIR}/cmake/MacPlistMacros.cmake)
 
@@ -207,4 +206,27 @@ if(NOT GDAL_FOUND)
      MESSAGE(FATAL_ERROR "Could not find GDAL")
   
   ENDIF (GDAL_FOUND)
+endfunction()
+
+set(GDAL_SEARCH_MODE CONFIG_THEN_MODULE CACHE STRING "'CONFIG_THEN_MODULE' (only finds >= 3.5). 'MODULE' soon-legacy code that also finds GDAL <3.5. CONFIG_THEN_MODULE, default, uses MODULE if CONFIG fails. " )
+
+if(GDAL_SEARCH_MODE STREQUAL "CONFIG")
+    find_package(GDAL CONFIG)
+endif()
+
+
+if(GDAL_SEARCH_MODE STREQUAL MODULE)
+    gdal_module_search()
+endif()
+
+
+if(GDAL_SEARCH_MODE STREQUAL CONFIG_THEN_MODULE)
+    find_package(GDAL CONFIG)
+    if(NOT GDAL_FOUND)
+        gdal_module_search()
+    endif()
+endif()
+
+if(NOT GDAL_FOUND)
+    MESSAGE(FATAL_ERROR "Could not find GDAL")
 endif()
