@@ -185,7 +185,7 @@ function (find_gdal_module_mode)
   
   
   IF (GDAL_INCLUDE_DIR AND GDAL_LIBRARY)
-     SET(GDAL_FOUND TRUE)
+     SET(GDAL_FOUND TRUE CACHE INTERNAL "help")
   ENDIF (GDAL_INCLUDE_DIR AND GDAL_LIBRARY)
   
   IF (GDAL_FOUND)
@@ -208,7 +208,16 @@ function (find_gdal_module_mode)
   ENDIF (GDAL_FOUND)
 endfunction()
 
-set(GDAL_SEARCH_MODE CONFIG_THEN_MODULE CACHE STRING "'CONFIG_THEN_MODULE' (only finds >= 3.5). 'MODULE' soon-legacy code that also finds GDAL <3.5. CONFIG_THEN_MODULE, default, uses MODULE if CONFIG fails. " )
+set(GDAL_SEARCH_MODE "CONFIG_THEN_MODULE" CACHE STRING "'CONFIG_THEN_MODULE' (only finds >= 3.5). 'MODULE' soon-legacy code that also finds GDAL <3.5. CONFIG_THEN_MODULE, default, uses MODULE if CONFIG fails. " )
+
+unset( GDAL_INCLUDE_DIRS CACHE )
+unset( GDAL_LIBRARIES CACHE )
+unset( GDAL_DEFINITIONS CACHE )
+unset( GDAL_EXECUTABLE CACHE )
+unset( GDAL_ROOT_DIR CACHE )
+unset( GDAL_VERSION CACHE )
+unset( GDAL_FOUND CACHE )
+unset( GDAL_DIR CACHE )
 
 if(GDAL_SEARCH_MODE STREQUAL "CONFIG")
     find_package(GDAL CONFIG)
