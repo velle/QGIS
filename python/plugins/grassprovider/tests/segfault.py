@@ -41,6 +41,7 @@ def processingTestDataPath():
 
 
 YAML = '''
+tests:
   - algorithm: grass7:r.latlong
     name: GRASS7 r.latlong
     params:
@@ -63,6 +64,8 @@ YAML = '''
         type: rasterhash
 '''
 
+
+
 from grassprovider.grass_provider import GrassProvider
 from grassprovider.grass_utils import GrassUtils
 
@@ -81,15 +84,15 @@ class TestAlgorithmsTest(QgisTestCase):
         assert GrassUtils.installedVersion()
 
 
-    def definition_file(self):
-        return 'grass_algorithms_raster_tests2.yaml'
-
     def test_algorithms(self):
         """
         This is the main test function. All others will be executed based on the definitions in testdata/algorithm_tests.yaml
         """
-        with open(os.path.join(processingTestDataPath(), self.definition_file())) as stream:
-            algorithm_tests = yaml.load(stream, Loader=yaml.SafeLoader)
+        # with open(os.path.join(processingTestDataPath(), self.definition_file())) as stream:
+        #     algorithm_tests = yaml.load(stream, Loader=yaml.SafeLoader)
+
+        algorithm_tests = yaml.load(YAML, Loader=yaml.SafeLoader)
+
 
         if 'tests' in algorithm_tests and algorithm_tests['tests'] is not None:
             for idx, algtest in enumerate(algorithm_tests['tests']):
