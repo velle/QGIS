@@ -145,8 +145,6 @@ class TestAlgorithmsTest(QgisTestCase):
             exec(('\n'.join(defs['expectedFailure'][:-1])), globals(), locals())
             expectFailure = eval(defs['expectedFailure'][-1])
 
-        if 'expectedException' in defs:
-            expectFailure = True
 
         # ignore user setting for invalid geometry handling
         context = QgsProcessingContext()
@@ -163,18 +161,9 @@ class TestAlgorithmsTest(QgisTestCase):
         ok, msg = alg.checkParameterValues(parameters, context)
         assert ok, 'Algorithm failed checkParameterValues with result {}'.format(msg)
 
-        if expectFailure:
-            try:
-                results, ok = alg.run(parameters, context, feedback)
-                self.check_results(results, context, parameters, defs['results'])
-                if ok:
-                    raise _UnexpectedSuccess
-            except Exception:
-                pass
-        else:
-            results, ok = alg.run(parameters, context, feedback)
-            assert ok, 'params: {}, results: {}'.format(parameters, results)
-            self.check_results(results, context, parameters, defs['results'])
+        results, ok = alg.run(parameters, context, feedback)
+        assert ok, 'params: {}, results: {}'.format(parameters, results)
+        self.check_results(results, context, parameters, defs['results'])
 
     def load_params(self, params):
         """
