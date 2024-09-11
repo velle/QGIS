@@ -50,6 +50,8 @@ If all of these three lines are left, it gives segfault:
 If any of them are commented out, the segfault disappears. 
 '''
 
+#RESULT_TIF = '/home/velle/a/QGIS/segfault.tif'
+RESULT_TIF = '/home/velle/b/QGIS/tests/testdata/raster/rgb_with_mask.tif'
 
 class TestAlgorithmsTest(QgisTestCase):
 
@@ -61,7 +63,6 @@ class TestAlgorithmsTest(QgisTestCase):
 
 
     def test_foo(self):
-        RESULT_TIF = '/home/velle/a/QGIS/segfault.tif'
         dataset = gdal.Open(RESULT_TIF, GA_ReadOnly)
         assert False, 234
 
