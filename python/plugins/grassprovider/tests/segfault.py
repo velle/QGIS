@@ -42,9 +42,12 @@ from grassprovider.grass_utils import GrassUtils
 
 '''
 
-If both start_app() and gdal.Open are called, a segfault results. 
-If any of them are commented out, the segfault disappears. 
+If all of these three lines are left, it gives segfault: 
+ - start_app()
+ - gdal.Open are called
+ - assert False 
 
+If any of them are commented out, the segfault disappears. 
 '''
 
 
