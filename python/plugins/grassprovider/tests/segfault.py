@@ -10,6 +10,8 @@ If both of these lines are left, it gives segfault:
 If any of them are commented out, the segfault disappears. 
 
 Changing the order of them still causes segfault
+
+I tried with a few different tif, and the result is the same. 
 '''
 
 if __name__ == '__main__':
