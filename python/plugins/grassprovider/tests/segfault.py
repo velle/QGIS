@@ -11,7 +11,7 @@ If any of them are commented out, the segfault disappears.
 
 I tried with a few different tif, and the result is the same. 
 
-Changing the order of the two lines causes a different kind of fatal error: 
+If changing the order of the two lines, some times it results in segfault, and sometimes it results in the following fatal error:
 
     double free or corruption (!prev)
     Aborted
@@ -21,3 +21,4 @@ Changing the order of the two lines causes a different kind of fatal error:
 if __name__ == '__main__':
     start_app()
     dataset = gdal.Open('/home/velle/a/QGIS/tests/testdata/raster/rgb_with_mask.tif', GA_ReadOnly)
+    print('the end')
