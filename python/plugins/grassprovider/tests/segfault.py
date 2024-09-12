@@ -8,6 +8,8 @@ If both of these lines are left, it gives segfault:
  - gdal.Open are called
 
 If any of them are commented out, the segfault disappears. 
+
+Changing the order of them still causes segfault
 '''
 
 if __name__ == '__main__':
