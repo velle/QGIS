@@ -5,7 +5,7 @@ from qgis.testing import start_app
 '''
 If both of these lines are left, it gives segfault: 
  - start_app()
- - gdal.Open are called
+ - gdal.Open(...)
 
 If any of them are commented out, the segfault disappears. 
 
