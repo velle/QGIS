@@ -2,6 +2,10 @@ from osgeo import gdal
 from osgeo.gdalconst import GA_ReadOnly
 from qgis.testing import start_app
 
+start_app()
+dataset = gdal.Open('/home/velle/a/QGIS/tests/testdata/raster/rgb_with_mask.tif', GA_ReadOnly)
+print('the end')
+
 '''
 If both of these lines are left, it gives segfault: 
  - start_app()
@@ -16,9 +20,5 @@ If changing the order of the two lines, some times it results in segfault, and s
     double free or corruption (!prev)
     Aborted
 
+The print line is always executed before the fatal error occurs. 
 '''
-
-if __name__ == '__main__':
-    start_app()
-    dataset = gdal.Open('/home/velle/a/QGIS/tests/testdata/raster/rgb_with_mask.tif', GA_ReadOnly)
-    print('the end')
