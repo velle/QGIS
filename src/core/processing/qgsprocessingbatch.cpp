@@ -23,6 +23,11 @@ QgsProcessingBatchFeedback::QgsProcessingBatchFeedback( int tasks, QgsProcessing
 
 }
 
+QgsProcessingBatchFeedback::~QgsProcessingBatchFeedback()
+{
+  qDebug("QgsProcessingBatchFeedback deconstructor running");
+}
+
 void QgsProcessingBatchFeedback::reportError( const QString &error, bool fatalError )
 {
   mErrors.append( error );

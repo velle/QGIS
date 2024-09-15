@@ -532,6 +532,7 @@ void QgsApplication::installTranslators()
 
 QgsApplication::~QgsApplication()
 {
+  qDebug("QgsApplication deconstructor running");
   if ( mApplicationMembers )
     mApplicationMembers->mSettingsRegistryCore->backwardCompatibility();
 

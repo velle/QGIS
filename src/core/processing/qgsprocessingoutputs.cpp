@@ -26,6 +26,14 @@ QgsProcessingOutputDefinition::QgsProcessingOutputDefinition( const QString &nam
   , mDescription( description )
 {}
 
+QgsProcessingOutputDefinition::QgsProcessingOutputDefinition( const QString &name, const QString &description )
+  : mName( name )
+  , mDescription( description )
+{
+  qDebug("QgsProcessingOutputDefinition deconstructor running");
+
+}
+
 QString QgsProcessingOutputDefinition::valueAsString( const QVariant &value, QgsProcessingContext &, bool &ok ) const
 {
   if ( QgsVariantUtils::isNull( value ) )

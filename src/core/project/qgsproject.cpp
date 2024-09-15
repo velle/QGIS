@@ -458,6 +458,7 @@ QgsProject::QgsProject( QObject *parent, Qgis::ProjectCapabilities capabilities 
 
 QgsProject::~QgsProject()
 {
+  qDebug("QgsProject deconstructor running");
   mIsBeingDeleted = true;
 
   clear();

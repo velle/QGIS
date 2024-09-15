@@ -20,14 +20,16 @@
 #include "qgsvectorfilewriter.h"
 #include "qgsrasterfilewriter.h"
 #include "qgsmessagelog.h"
+#include <QApplication>
+#include <QtDebug>
 
 QgsProcessingProvider::QgsProcessingProvider( QObject *parent SIP_TRANSFERTHIS )
   : QObject( parent )
 {}
 
-
 QgsProcessingProvider::~QgsProcessingProvider()
 {
+  qDebug("QgsProcessingProvider deconstructor running");
   qDeleteAll( mAlgorithms );
 }
 

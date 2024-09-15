@@ -35,6 +35,7 @@
 
 QgsProcessingAlgorithm::~QgsProcessingAlgorithm()
 {
+  qDebug("QgsProcessingAlgorithm deconstructor running");
   qDeleteAll( mParameters );
   qDeleteAll( mOutputs );
 }

@@ -40,6 +40,7 @@ QgsProcessingContext::QgsProcessingContext()
 
 QgsProcessingContext::~QgsProcessingContext()
 {
+  qDebug("QgsProcessingContext deconstructor running");
   for ( auto it = mLayersToLoadOnCompletion.constBegin(); it != mLayersToLoadOnCompletion.constEnd(); ++it )
   {
     delete it.value().postProcessor();

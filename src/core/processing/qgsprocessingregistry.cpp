@@ -86,6 +86,7 @@ QgsProcessingRegistry::QgsProcessingRegistry( QObject *parent SIP_TRANSFERTHIS )
 
 QgsProcessingRegistry::~QgsProcessingRegistry()
 {
+  qDebug("QgsProcessingRegistry deconstructor running");
   const auto constMProviders = mProviders;
   for ( QgsProcessingProvider *p : constMProviders )
   {
