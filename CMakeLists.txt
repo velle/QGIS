@@ -1255,3 +1255,11 @@ endif()
 if (UNIX AND NOT APPLE)
   add_subdirectory(linux)
 endif()
+
+#############################################################
+# setenv.sh
+
+set(PERM_775 OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+configure_file(${CMAKE_SOURCE_DIR}/scripts/setenv.sh.in ${CMAKE_BINARY_DIR}/setenv.sh FILE_PERMISSIONS ${PERM_775} )
+
+# @TODO@thomasw: Figure out if it's acceptable to define a constant/alias (PERM_775) this way (using set). 
