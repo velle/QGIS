@@ -1,4 +1,3 @@
-from qgis.testing import start_app
 from qgis.core import QgsApplication
 
 print('setup')
